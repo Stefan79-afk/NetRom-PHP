@@ -13,7 +13,7 @@ class Booking
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'time')]
+    #[ORM\Column(type: 'string')]
     private $startTime;
 
     #[ORM\Column(type: 'integer')]
@@ -32,12 +32,12 @@ class Booking
         return $this->id;
     }
 
-    public function getStartTime(): ?\DateTimeInterface
+    public function getStartTime(): ?string
     {
         return $this->startTime;
     }
 
-    public function setStartTime(\DateTimeInterface $startTime): self
+    public function setStartTime(string $startTime): self
     {
         $this->startTime = $startTime;
 

@@ -19,8 +19,6 @@ class Station
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\OneToOne(mappedBy: 'stationId', targetEntity: Plugs::class, cascade: ['persist', 'remove'])]
-    private $plugs;
 
     public function getId(): ?int
     {
@@ -51,20 +49,4 @@ class Station
         return $this;
     }
 
-    public function getPlugs(): ?Plugs
-    {
-        return $this->plugs;
-    }
-
-    public function setPlugs(Plugs $plugs): self
-    {
-        // set the owning side of the relation if necessary
-        if ($plugs->getStationId() !== $this) {
-            $plugs->setStationId($this);
-        }
-
-        $this->plugs = $plugs;
-
-        return $this;
-    }
 }
