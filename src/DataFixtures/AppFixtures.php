@@ -10,11 +10,14 @@ use App\Entity\Car;
 use Cassandra\Time;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use App\Entity\UserLogin;
 
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+
+        $time = new \DateTime();
         //Users
         $user1 = new User();
         $user1->setName("John Smith");
@@ -144,22 +147,24 @@ class AppFixtures extends Fixture
 
         //Booking
         $booking1 = new Booking();
-        $booking1->setStartTime("19:00");
+        $booking1->setStartTime($time);
         $booking1->setDuration(90);
         $booking1->setCarId($car1);
         $booking1->setPlugId($plug1);
 
         $booking2 = new Booking();
-        $booking2->setStartTime("12:00");
+        $booking2->setStartTime($time);
         $booking2->setDuration(120);
         $booking2->setCarId($car6);
         $booking2->setPlugId($plug3);
 
         $booking3 = new Booking();
-        $booking3->setStartTime("10:45");
+        $booking3->setStartTime($time);
         $booking3->setDuration(30);
         $booking3->setCarId($car9);
         $booking3->setPlugId($plug2);
+
+        //UserLogin
 
         //Persists
         $manager->persist($user1);
@@ -177,7 +182,7 @@ class AppFixtures extends Fixture
         $manager->persist($car6);
         $manager->persist($car7);
         $manager->persist($car8);
-        $manager->persist($car9);;
+        $manager->persist($car9);
 
         $manager->persist($station1);
         $manager->persist($station2);
@@ -197,5 +202,8 @@ class AppFixtures extends Fixture
 
         //Flush
         $manager->flush();
+
+
+
     }
 }

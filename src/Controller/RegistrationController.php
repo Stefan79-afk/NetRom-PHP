@@ -4,8 +4,11 @@ namespace App\Controller;
 
 
 use App\Entity\Booking;
+use App\Form\BookingType;
 use App\Repository\BookingRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,4 +26,5 @@ class RegistrationController extends AbstractController
             'registration' => $bookingData,
         ]);
     }
+
 }

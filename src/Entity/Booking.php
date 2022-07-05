@@ -13,8 +13,6 @@ class Booking
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string')]
-    private $startTime;
 
     #[ORM\Column(type: 'integer')]
     private $duration;
@@ -27,21 +25,12 @@ class Booking
     #[ORM\JoinColumn(nullable: false)]
     private $plugId;
 
+    #[ORM\Column(type: 'datetime')]
+    private $startTime;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getStartTime(): ?string
-    {
-        return $this->startTime;
-    }
-
-    public function setStartTime(string $startTime): self
-    {
-        $this->startTime = $startTime;
-
-        return $this;
     }
 
     public function getDuration(): ?int
@@ -76,6 +65,18 @@ class Booking
     public function setPlugId(Plugs $plugId): self
     {
         $this->plugId = $plugId;
+
+        return $this;
+    }
+
+    public function getStartTime(): ?\DateTimeInterface
+    {
+        return $this->startTime;
+    }
+
+    public function setStartTime(\DateTimeInterface $startTime): self
+    {
+        $this->startTime = $startTime;
 
         return $this;
     }
