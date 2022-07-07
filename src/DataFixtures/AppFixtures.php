@@ -122,28 +122,68 @@ class AppFixtures extends Fixture
         $plug1 = new Plugs();
         $plug1->setStatus("Ready");
         $plug1->setType("Type 1");
-        $plug1->setStationId($station1);
+
 
         $plug2 = new Plugs();
         $plug2->setStatus("Ready");
         $plug2->setType("Type 2");
-        $plug2->setStationId($station2);
 
         $plug3 = new Plugs();
         $plug3->setStatus("Busy");
         $plug3->setType("Type 1");
-        $plug3->setStationId($station3);
+
 
         $plug4 = new Plugs();
         $plug4->setStatus("In Maintenance");
         $plug4->setType("Type 2");
-        $plug4->setStationId($station4);
+
 
         $plug5 = new Plugs();
         $plug5->setStatus("Temporarily Unavailable");
         $plug5->setType("Type 1");
-        $plug5->setStationId($station5);
 
+
+        //Station and Plug
+        /*
+        $plug1->setStation($station1);
+        $plug1->setStation($station3);
+
+        $plug2->setStation($station1);
+        $plug2->setStation($station5);
+        $plug2->setStation($station3);
+
+        $plug3->setStation($station2);
+        $plug3->setStation($station4);
+
+        $plug4->setStation($station3);
+        $plug4->setStation($station2);
+        $plug4->setStation($station5);
+
+        $plug5->setStation($station4);
+        $plug5->setStation($station5);
+        $plug5->setstation($station1);
+        $plug5->setStation($station2);
+        $plug5->setStation($station3);
+        */
+        $station1->addPlug($plug1);
+        $station1->addPlug($plug2);
+        $station1->addPlug($plug5);
+
+        $station2->addPlug($plug3);
+        $station2->addPlug($plug4);
+        $station2->addPlug($plug5);
+
+        $station3->addPlug($plug1);
+        $station3->addPlug($plug2);
+        $station3->addPlug($plug4);
+        $station3->addPlug($plug5);
+
+        $station4->addPlug($plug3);
+        $station4->addPlug($plug5);
+
+        $station5->addPlug($plug2);
+        $station5->addPlug($plug4);
+        $station5->addPlug($plug5);
 
         //Booking
         $booking1 = new Booking();

@@ -20,21 +20,35 @@ Booking ID:{{ item.id }}
                 <li>
 
                     <h3>User(s)</h3>
-                    <ul>
-                        {% for user in item.carId.getUsersArr %}
+
+                    {% for user in item.carId.getUsersArr %}
+                        <ul>
                             <li>ID: {{ user.getId() }}</li>
                             <li>Name: {{ user.getName() }}</li>
-                            <li>Emai: {{ user.getEmail() }}</li>
+                            <li>Email: {{ user.getEmail() }}</li>
                             <li>Authentication: {{ user.getAuth() }}</li>
-                        {% endfor %}
-                    </ul>
+                        </ul>
+                    {% endfor %}
+
                 </li>
             </ul>
         </li>
         <li>
-            <h3>Plug</h3>
+            <h3>Station</h3>
             <ul>
-                <li>{{ item.plugId.getId) }}</li>
+                <li>ID: {{ item.plugId.getStation.getId }}</li>
+                <li>Location: {{ item.plugId.getStation.getLocation }}</li>
+                <li>Name: {{ item.plugId.getStation.getName }}</li>
+                <li>
+                    <h3>Plug(s)</h3>
+                    {% for plug in item.plugId.getStation.getPlugs %}
+                    <ul>
+                        <li>ID: {{plug.getId() }}</li>
+                        <li>Status: {{ plug.getStatus() }}</li>
+                        <li>Type: {{ plug.getType() }}</li>
+                    </ul>
+                    {% endfor %}
+                </li>
             </ul>
         </li>
     </ul>
