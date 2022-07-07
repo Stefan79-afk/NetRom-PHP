@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RegistrationController!{% endblock %}
+
+{% block body %}
+    <h1 class="container-fluid text-center p-5 bg-primary text-white">Current Bookings</h1>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Booking ID</th>
+            <th>Start Time</th>
+            <th>Duration</th>
+            <th>Car Plate</th>
+            <th>Plug Type</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for item in registration %}
+            {#                <!--<li class=>{{item.id}} {{ item.startTime }} {{ item.duration }} {{ item.carId.id }} {{ item. plugId.id}}</li>-->#}
+            <a href="/booking_{item.id}" >
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.startTime |date("F jS \\a\\t g:ia")}}</td>
+                    <td>{{ item.duration }}</td>
+                    <td>{{ item.carId.plate}}</td>
+                    <td>{{ item.carId.plugType }}</td>
+                </tr>
+            </a>
+
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+    <a href="/create"  style="width: 100px;background-color: red;">
+        <button class="container bg-primary d-flex justify-content-center text-white" style="width:10%;">
+            Add New Booking
+        </button>
+    </a>
+{% endblock %}
