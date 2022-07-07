@@ -19,9 +19,9 @@ class Plugs
     #[ORM\Column(type: 'string', length: 255)]
     private $type;
 
-    #[ORM\OneToOne(inversedBy: 'plugs', targetEntity: Station::class, cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(targetEntity: Station::class, inversedBy: 'plugs')]
     #[ORM\JoinColumn(nullable: false)]
-    private $stationId;
+    private $station;
 
     public function getId(): ?int
     {
@@ -52,14 +52,14 @@ class Plugs
         return $this;
     }
 
-    public function getStationId(): ?Station
+    public function getStation(): ?Station
     {
-        return $this->stationId;
+        return $this->station;
     }
 
-    public function setStationId(Station $stationId): self
+    public function setStation(?Station $station): self
     {
-        $this->stationId = $stationId;
+        $this->station = $station;
 
         return $this;
     }

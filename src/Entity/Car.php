@@ -81,4 +81,14 @@ class Car
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return (string) $this->getId();
+    }
+
+    public function getUsersArr(): array{
+        $user = $this->getUserId();
+        return $user->getValues();
+    }
 }
