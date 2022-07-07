@@ -8,11 +8,12 @@ Booking ID:{{ item.id }}
 {% block body %}
 
     <h1 class="container-fluid text-center p-5 bg-primary text-white">Booking ID: {{ item.id }}</h1>
-    <ul>
+    <ul class="container-fluid p-5 bg-secondary text-white">
         <li>Start Time: {{ item.startTime|date("F jS \\a\\t g:ia") }}</li>
         <li>Duration: {{ item.duration }} minutes</li>
         <li>
             <h3>Car </h3>
+            <div class="container-fluid p-5 bg-info text-white">
             <ul>
                 <li>ID: {{ item.carId }}</li>
                 <li>Plate: {{ item.carId.plate }}</li>
@@ -20,6 +21,8 @@ Booking ID:{{ item.id }}
                 <li>
 
                     <h3>User(s)</h3>
+
+                    <div class="container-fluid bg-dark text-white">
 
                     {% for user in item.carId.getUsersArr %}
                         <ul>
@@ -29,27 +32,33 @@ Booking ID:{{ item.id }}
                             <li>Authentication: {{ user.getAuth() }}</li>
                         </ul>
                     {% endfor %}
-
+                    </div>
                 </li>
             </ul>
+            </div>
         </li>
         <li>
             <h3>Station</h3>
+            <div class="container-fluid p-5 bg-info text-white">
             <ul>
                 <li>ID: {{ item.plugId.getStation.getId }}</li>
                 <li>Location: {{ item.plugId.getStation.getLocation }}</li>
                 <li>Name: {{ item.plugId.getStation.getName }}</li>
                 <li>
                     <h3>Plug(s)</h3>
+                    <div class="container-fluid p-5 bg-dark text-white">
                     {% for plug in item.plugId.getStation.getPlugs %}
                     <ul>
                         <li>ID: {{plug.getId() }}</li>
                         <li>Status: {{ plug.getStatus() }}</li>
                         <li>Type: {{ plug.getType() }}</li>
                     </ul>
+                        <hr>
                     {% endfor %}
+                    </div>
                 </li>
             </ul>
+            </div>
         </li>
     </ul>
 
