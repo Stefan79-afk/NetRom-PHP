@@ -19,7 +19,7 @@ class Plugs
     #[ORM\Column(type: 'string', length: 255)]
     private $type;
 
-    #[ORM\OneToOne(inversedBy: 'plugs', targetEntity: Station::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: Station::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private $stationId;
 

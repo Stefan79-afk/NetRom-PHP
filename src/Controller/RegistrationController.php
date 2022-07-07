@@ -27,4 +27,14 @@ class RegistrationController extends AbstractController
         ]);
     }
 
+    #[Route('registration/{id}', name:'app_view')]
+    public function show(EntityManagerInterface $em, int $id): Response{
+        $repository = $em->getRepository(Booking::class);
+        $item = $repository->find($id);
+
+        return $this->render('registration/show.html.twig', [
+            'item' => $item
+        ]);
+    }
+
 }

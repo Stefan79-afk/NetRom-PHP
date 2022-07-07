@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Booking ID:{{ item.id }}
+{% endblock %}
+
+
+{% block body %}
+
+    <h1 class="container-fluid text-center p-5 bg-primary text-white">Booking ID: {{ item.id }}</h1>
+    <ul>
+        <li>Start Time: {{ item.startTime|date("F jS \\a\\t g:ia") }}</li>
+        <li>Duration: {{ item.duration }} minutes</li>
+        <li>
+            <h3>Car </h3>
+            <ul>
+                <li>ID: {{ item.carId }}</li>
+                <li>Plate: {{ item.carId.plate }}</li>
+                <li>Plug Type: {{ item.carId.plugType }}</li>
+                <li>
+
+                    <h3>User(s)</h3>
+                    <ul>
+                        {% for user in item.carId.getUsersArr %}
+                            <li>ID: {{ user.getId() }}</li>
+                            <li>Name: {{ user.getName() }}</li>
+                            <li>Emai: {{ user.getEmail() }}</li>
+                            <li>Authentication: {{ user.getAuth() }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h3>Plug</h3>
+            <ul>
+                <li>{{ item.plugId.getId) }}</li>
+            </ul>
+        </li>
+    </ul>
+
+{% endblock %}
