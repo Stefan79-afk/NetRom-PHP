@@ -84,7 +84,7 @@ class Car
 
     public function __toString(): string
     {
-        return (string) $this->getId();
+        return (string) $this->getId() . $this->getPlate();
     }
 
     public function getUsersArr(): array{

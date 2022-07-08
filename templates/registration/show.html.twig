@@ -15,7 +15,6 @@ Booking ID:{{ item.id }}
             <h3>Car </h3>
             <div class="container-fluid p-5 bg-info text-white">
             <ul>
-                <li>ID: {{ item.carId }}</li>
                 <li>Plate: {{ item.carId.plate }}</li>
                 <li>Plug Type: {{ item.carId.plugType }}</li>
                 <li>
@@ -26,10 +25,8 @@ Booking ID:{{ item.id }}
 
                     {% for user in item.carId.getUsersArr %}
                         <ul>
-                            <li>ID: {{ user.getId() }}</li>
                             <li>Name: {{ user.getName() }}</li>
                             <li>Email: {{ user.getEmail() }}</li>
-                            <li>Authentication: {{ user.getAuth() }}</li>
                         </ul>
                     {% endfor %}
                     </div>
@@ -41,7 +38,6 @@ Booking ID:{{ item.id }}
             <h3>Station</h3>
             <div class="container-fluid p-5 bg-info text-white">
             <ul>
-                <li>ID: {{ item.plugId.getStation.getId }}</li>
                 <li>Location: {{ item.plugId.getStation.getLocation }}</li>
                 <li>Name: {{ item.plugId.getStation.getName }}</li>
                 <li>
@@ -49,7 +45,6 @@ Booking ID:{{ item.id }}
                     <div class="container-fluid p-5 bg-dark text-white">
                     {% for plug in item.plugId.getStation.getPlugs %}
                     <ul>
-                        <li>ID: {{plug.getId() }}</li>
                         <li>Status: {{ plug.getStatus() }}</li>
                         <li>Type: {{ plug.getType() }}</li>
                     </ul>
