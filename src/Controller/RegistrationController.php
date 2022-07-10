@@ -2,39 +2,43 @@
 
 namespace App\Controller;
 
-
-use App\Entity\Booking;
-use App\Form\BookingType;
-use App\Repository\BookingRepository;
+use App\Entity\User;
+use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
 {
-    #[Route('/registration', name: 'app_registration')]
-    public function index(EntityManagerInterface $em): Response
+    #[Route('/register', name: 'app_register')]
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
-        $repository = $em->getRepository(Booking::class);
-        $bookingData = $repository->findAll();
+        $user = new User($userPasswordHasher);
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            // encode the plain password
+            $user->setPassword(
+            $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
 
-        return $this->render('registration/index.html.twig', [
-            'registration' => $bookingData,
+            $entityManager->persist($user);
+            $entityManager->flush();
+            // do anything else you need here, like send an email
+
+            return $this->redirectToRoute('app_registration');
+        }
+
+        return $this->render('registration/register.html.twig', [
+            'registrationForm' => $form->createView(),
         ]);
     }
-
-    #[Route('registration/{id}', name:'app_view')]
-    public function show(EntityManagerInterface $em, int $id): Response{
-        $repository = $em->getRepository(Booking::class);
-        $item = $repository->find($id);
-
-        return $this->render('registration/show.html.twig', [
-            'item' => $item
-        ]);
-    }
-
 }

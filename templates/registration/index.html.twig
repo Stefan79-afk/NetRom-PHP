@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1 class="container-fluid text-center p-5 bg-primary text-white">Current Bookings</h1>
-    <table class="table table-hover">
+    <table class="table table-hover text-white table-dark table-striped">
         <thead>
         <tr>
             <th>Booking ID</th>
@@ -17,12 +17,12 @@
 
         <tbody>
         {% for item in registration %}
-            <tr onclick="location.href = 'registration/{{ item.id }}' " onmouseover="">
+            <tr onclick="location.href = 'booking/{{ item.id }}' " onmouseover="">
                 <td>{{ item.id }}</td>
                 <td>{{ item.startTime |date("F jS \\a\\t g:ia")}}</td>
                 <td>{{ item.duration }}</td>
                 <td>{{ item.carId.plate}}</td>
-                <td>{{ item.plugId}}</td>
+                <td>{{ item.plugId.getType}}</td>
             </tr>
         {% endfor %}
         </tbody>

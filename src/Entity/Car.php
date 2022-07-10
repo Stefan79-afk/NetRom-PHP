@@ -23,7 +23,6 @@ class Car
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'cars')]
     private $userId;
-
     public function __construct()
     {
         $this->userId = new ArrayCollection();
