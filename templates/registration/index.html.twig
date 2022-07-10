@@ -17,17 +17,13 @@
 
         <tbody>
         {% for item in registration %}
-            {#                <!--<li class=>{{item.id}} {{ item.startTime }} {{ item.duration }} {{ item.carId.id }} {{ item. plugId.id}}</li>-->#}
-            <a href="/booking_{item.id}" >
-                <tr>
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.startTime |date("F jS \\a\\t g:ia")}}</td>
-                    <td>{{ item.duration }}</td>
-                    <td>{{ item.carId.plate}}</td>
-                    <td>{{ item.carId.plugType }}</td>
-                </tr>
-            </a>
-
+            <tr onclick="location.href = 'registration/{{ item.id }}' " onmouseover="">
+                <td>{{ item.id }}</td>
+                <td>{{ item.startTime |date("F jS \\a\\t g:ia")}}</td>
+                <td>{{ item.duration }}</td>
+                <td>{{ item.carId.plate}}</td>
+                <td>{{ item.plugId}}</td>
+            </tr>
         {% endfor %}
         </tbody>
 
