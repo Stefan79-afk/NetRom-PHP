@@ -11,6 +11,7 @@ use Cassandra\Time;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\UserLogin;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 
 class AppFixtures extends Fixture
 {
@@ -22,27 +23,33 @@ class AppFixtures extends Fixture
         $user1 = new User();
         $user1->setName("John Smith");
         $user1->setEmail("john.smith@gmail.com");
-        $user1->setAuth("password");
+        $user1->setPassword("password");
+        $user1->setRoles(['ROLE_USER']);
 
         $user2 = new User();
         $user2->setName("Steven Nathan");
         $user2->setEmail("steve.nathan@gmail.com");
-        $user2->setAuth("randomPassword12(");
+        $user2->setPassword("randomPassword12(");
+        $user2->setRoles(['ROLE_USER']);
 
         $user3 = new User();
         $user3->setName("Kelly Williams");
         $user3->setEmail("kelly.williams@gmail.com");
-        $user3->setAuth("qwdfvbhjio90");
+        $user3->setPassword("qwdfvbhjio90");
+        $user3->setRoles(['ROLE_USER']);
 
         $user4 = new User();
         $user4->setName("Ashley Chambers");
         $user4->setEmail("ash.chambers@gmail.com");
-        $user4->setAuth("asjknakln29381%^$^");
+        $user4->setPassword( "asjknakln29381%^$^ ");
+        $user4->setRoles(['ROLE_USER']);
 
         $user5 = new User();
         $user5->setName("Phill Jackson");
         $user5->setEmail("phill.jack@gmail.com");
-        $user5->setAuth("akksnkjalsngla153*$(*$");
+        $user5->setPassword("akksnkjalsngla153*$(*$");
+        $user5->setRoles(['ROLE_USER']);
+
 
         //Cars
         $car1 = new Car();
@@ -242,7 +249,6 @@ class AppFixtures extends Fixture
 
         //Flush
         $manager->flush();
-
 
 
     }
