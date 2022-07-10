@@ -17,7 +17,7 @@
 
         <tbody>
         {% for item in registration %}
-            <tr onclick="location.href = 'registration/{{ item.id }}' " onmouseover="">
+            <tr onclick="location.href = 'booking/{{ item.id }}' " onmouseover="">
                 <td>{{ item.id }}</td>
                 <td>{{ item.startTime |date("F jS \\a\\t g:ia")}}</td>
                 <td>{{ item.duration }}</td>
