@@ -37,4 +37,28 @@ class RegistrationController extends AbstractController
         ]);
     }
 
+    #[Route('/create', name:'app_create')]
+    public function create(EntityManagerInterface $em, Request $request): Response{
+        $booking = new Booking();
+
+        $form = $this->createForm(BookingType::class, $booking);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $booking = $form->getData();
+            dd($booking);
+            /*
+            $em->persist($booking);
+
+            $em->flush();
+
+            $this->redirectToRoute('app_registration');
+            */
+        }
+        return $this->renderForm('registration/create.html.twig', [
+            'form' => $form
+        ]);
+    }
+
 }
