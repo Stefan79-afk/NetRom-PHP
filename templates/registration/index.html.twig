@@ -22,7 +22,7 @@
                 <td>{{ item.startTime |date("F jS \\a\\t g:ia")}}</td>
                 <td>{{ item.duration }}</td>
                 <td>{{ item.carId.plate}}</td>
-                <td>{{ item.plugId}}</td>
+                <td>{{ item.plugId.getType}}</td>
             </tr>
         {% endfor %}
         </tbody>
