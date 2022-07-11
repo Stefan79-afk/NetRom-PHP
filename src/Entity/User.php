@@ -36,6 +36,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type:"json")]
     private $roles = [];
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $address;
+
     public function __construct()
     {
         $this->cars = new ArrayCollection();
@@ -134,5 +137,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
     }
 }
