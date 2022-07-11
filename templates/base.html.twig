@@ -16,6 +16,14 @@
     {% endblock %}
 </head>
 <body class="bg-dark text-white">
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+<nav class="navbar p-1">
+    <h5 class="h5">Hello, {{ app.user.name }}!</h5>
+    <a href="/cars">My Cars</a>
+    <a href="/stations">Stations</a>
+    <button onclick="location.href='/logout'">Logout</button>
+</nav>
+{% endif %}
 {% block body %}{% endblock %}
 </body>
 </html>

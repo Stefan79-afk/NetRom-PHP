@@ -24,6 +24,9 @@ class Station
     #[ORM\OneToMany(mappedBy: 'station', targetEntity: Plugs::class, orphanRemoval: true)]
     private $plugs;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $address;
+
     public function __construct()
     {
         $this->plugs = new ArrayCollection();
@@ -92,6 +95,18 @@ class Station
     public function __toString(): string
     {
         return (string) $this->getId();
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
     }
 
 }

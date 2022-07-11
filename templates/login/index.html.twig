@@ -10,15 +10,16 @@
 
     <h1 class="bg-primary p-5 text-center">Login</h1>
 
-    <form class="container-fluid text-center p-5" action="{{ path('app_login') }}" method="post">
-        <div class="mb-3 mt-3">
+    <form class="was-validated p-5 text-center container" action="{{ path('app_login') }}" method="post">
+
+        <div class="mb-3 mt-3 container" style="max-width: 50%">
             <label class="form-label" for="username">Email:</label>
-            <input class="form-control bg-secondary text-white" type="text" id="username" name="_username" value="{{ last_username }}"/>
+            <input class="form-control bg-secondary text-white" type="text" id="username" name="_username" value="{{ last_username }}" required/>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3 mt-3 container" style="max-width: 50%">
             <label class="form-label" for="password">Password:</label>
-            <input class="form-control bg-secondary text-white" type="password" id="password" name="_password"/>
+            <input class="form-control bg-secondary text-white" type="password" id="password" name="_password" required/>
         </div>
 
         <input type="hidden" name="_target_path" value="/bookings"/>

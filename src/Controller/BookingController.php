@@ -28,7 +28,7 @@ class BookingController extends AbstractController
             'registration' => $bookingData,
         ]);
     }
-    #[Route('booking/{id}', name:'app_view')]
+    #[Route('/booking/{id}', name:'app_view')]
     public function show(EntityManagerInterface $em, int $id): Response{
         $repository = $em->getRepository(Booking::class);
         $item = $repository->find($id);
@@ -36,5 +36,9 @@ class BookingController extends AbstractController
         return $this->render('registration/show.html.twig', [
             'item' => $item
         ]);
+    }
+    #[Route('/', name:'app_default')]
+    public function default(): Response{
+        return $this->redirectToRoute('app_registration');
     }
 }
