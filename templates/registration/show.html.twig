@@ -1,60 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Booking ID:{{ item.id }}
+    {{ app.user.name }}'s Cars
 {% endblock %}
 
 
 {% block body %}
 
-    <h1 class="container-fluid text-center p-5 bg-primary text-white">Booking ID: {{ item.id }}</h1>
-    <ul class="container-fluid p-5 bg-secondary text-white">
-        <li>Start Time: {{ item.startTime|date("F jS \\a\\t g:ia") }}</li>
-        <li>Duration: {{ item.duration }} minutes</li>
-        <li>
-            <h3>Car </h3>
-            <div class="container-fluid p-5 bg-info text-white">
-                <ul>
-                    <li>Plate: {{ item.carId.plate }}</li>
-                    <li>Plug Type: {{ item.carId.plugType }}</li>
-                    <li>
+    <h1 class="container-fluid text-center p-5 bg-primary text-white">Your Cars</h1>
+    <table class="table table-hover text-white table-dark table-striped">
+        <thead>
+        <tr>
+            <th>Car Plate</th>
+            <th>Car Plug Type</th>
+            <th>Action</th>
+        </tr>
+        </thead>
 
-                        <h3>User(s)</h3>
+        <tbody>
+        {% for car in cars %}
+            <tr>
+                <td>{{ car.getPlate}}</td>
+                <td>{{ car.getPlugType}}</td>
 
-                        <div class="container-fluid bg-dark text-white">
+                <td>
+                    <button class="btn btn-success">Update Car</button>
+                    <button class="btn btn-danger">Delete Car</button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
 
-                            {% for user in item.carId.getUsersArr %}
-                                <ul>
-                                    <li>Name: {{ user.getName() }}</li>
-                                    <li>Email: {{ user.getEmail() }}</li>
-                                </ul>
-                            {% endfor %}
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li>
-            <h3>Station</h3>
-            <div class="container-fluid p-5 bg-info text-white">
-                <ul>
-                    <li>Location: {{ item.plugId.getStation.getLocation }}</li>
-                    <li>Name: {{ item.plugId.getStation.getName }}</li>
-                    <li>
-                        <h3>Plug(s)</h3>
-                        <div class="container-fluid p-5 bg-dark text-white">
-                            {% for plug in item.plugId.getStation.getPlugs %}
-                                <ul>
-                                    <li>Status: {{ plug.getStatus() }}</li>
-                                    <li>Type: {{ plug.getType() }}</li>
-                                </ul>
-                                <hr>
-                            {% endfor %}
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </li>
-    </ul>
-
+    </table>
 {% endblock %}

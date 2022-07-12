@@ -29,13 +29,13 @@ class BookingController extends AbstractController
             'stations' => $stationData,
         ]);
     }
-    #[Route('/station/{id}', name:'app_view')]
+    #[Route('/cars/user={id}', name:'app_view')]
     public function show(EntityManagerInterface $em, int $id): Response{
-        $repository = $em->getRepository(Booking::class);
-        $item = $repository->find($id);
-
+        $repository = $em->getRepository(User::class);
+        $user = $repository->find($id);
+        $cars = $user->getCars();
         return $this->render('registration/show.html.twig', [
-            'item' => $item
+            'cars' => $cars
         ]);
     }
     #[Route('/', name:'app_default')]
@@ -45,5 +45,10 @@ class BookingController extends AbstractController
     #[Route('/stations', name: 'app_redirect')]
     public function redirection(Security $security): Response{
         return $this->redirectToRoute('app_stations', ['location' => $security->getUser()->getAddress()]);
+    }
+
+    #[Route('/account/user={id}', name: 'app_user')]
+    public function userInfo(int $id): Response{
+        return $this->render('registration/user.html.twig');
     }
 }
