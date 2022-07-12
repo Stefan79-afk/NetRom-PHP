@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\Booking;
+use App\Entity\Station;
 use App\Entity\User;
 use App\Form\BookingType;
 use App\Repository\BookingRepository;
@@ -14,21 +15,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 class BookingController extends AbstractController
 {
-    #[Route('/bookings', name: 'app_registration')]
-    public function index(EntityManagerInterface $em): Response
+    #[Route('/stations/{location}', name: 'app_stations')]
+    public function index(EntityManagerInterface $em, string $location, Security $security): Response
     {
-        $repository = $em->getRepository(Booking::class);
-        $bookingData = $repository->findAll();
-
-
+        $repository = $em->getRepository(Station::class);
+        $user = $security->getUser();
+        $stationData = $repository->findBy(array('address' => $location));
         return $this->render('registration/index.html.twig', [
-            'registration' => $bookingData,
+            'stations' => $stationData,
         ]);
     }
-    #[Route('/booking/{id}', name:'app_view')]
+    #[Route('/station/{id}', name:'app_view')]
     public function show(EntityManagerInterface $em, int $id): Response{
         $repository = $em->getRepository(Booking::class);
         $item = $repository->find($id);
@@ -39,6 +40,10 @@ class BookingController extends AbstractController
     }
     #[Route('/', name:'app_default')]
     public function default(): Response{
-        return $this->redirectToRoute('app_registration');
+        return $this->redirectToRoute('app_redirect');
+    }
+    #[Route('/stations', name: 'app_redirect')]
+    public function redirection(Security $security): Response{
+        return $this->redirectToRoute('app_stations', ['location' => $security->getUser()->getAddress()]);
     }
 }

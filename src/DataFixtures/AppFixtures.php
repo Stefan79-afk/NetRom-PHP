@@ -36,7 +36,7 @@ class AppFixtures extends Fixture
             "password"
         ));
         $user1->setRoles(['ROLE_USER']);
-        $user1->setAddress("Bucharest, Romania");
+        $user1->setAddress("Bucharest");
 
         $user2 = new User();
         $user2->setName("Steven Nathan");
@@ -46,7 +46,7 @@ class AppFixtures extends Fixture
             "randomPassword12("
         ));
         $user2->setRoles(['ROLE_USER']);
-        $user2->setAddress("Cluj-Napoca, Romania");
+        $user2->setAddress("Cluj-Napoca");
 
         $user3 = new User();
         $user3->setName("Kelly Williams");
@@ -56,7 +56,7 @@ class AppFixtures extends Fixture
             "qwdfvbhjio90"
         ));
         $user3->setRoles(['ROLE_USER']);
-        $user3->setAddress("Timisoara, Romania");
+        $user3->setAddress("Timisoara");
 
         $user4 = new User();
         $user4->setName("Ashley Chambers");
@@ -66,7 +66,7 @@ class AppFixtures extends Fixture
             "asjknakln29381%^$^ "
         ));
         $user4->setRoles(['ROLE_USER']);
-        $user4->setAddress("Oradea, Romania");
+        $user4->setAddress("Oradea");
 
         $user5 = new User();
         $user5->setName("Phill Jackson");
@@ -76,7 +76,7 @@ class AppFixtures extends Fixture
             "akksnkjalsngla153*$(*$"
         ));
         $user5->setRoles(['ROLE_USER']);
-        $user5->setAddress("Craiova, Romania");
+        $user5->setAddress("Craiova");
 
         //Cars
         $car1 = new Car();
@@ -135,27 +135,27 @@ class AppFixtures extends Fixture
         $station1 = new Station();
         $station1->setName("Circumvalatiunii Station 1");
         $station1->setLocation("Strada Circumvalatiunii");
-        $station1->setAddress("Timisoara, Romania");
+        $station1->setAddress("Timisoara");
 
         $station2 = new Station();
         $station2->setName("Centru Station 1");
         $station2->setLocation("Bulevardul Michel Angelo");
-        $station2->setAddress("Craiova, Romania");
+        $station2->setAddress("Craiova");
 
         $station3 = new Station();
         $station3->setName("Calea Aradului Station 1");
         $station3->setLocation("Calea Aradului nr. 42");
-        $station3->setAddress("Cluj-Napoca, Romania");
+        $station3->setAddress("Cluj-Napoca");
 
         $station4 = new Station();
         $station4->setName("Circumvalatiunii Station 2");
         $station4->setLocation("Strada Circumvalatiunii");
-        $station4->setAddress("Oradea, Romania");
+        $station4->setAddress("Oradea");
 
         $station5 = new Station();
         $station5->setName("Centru Station 2");
         $station5->setLocation("Bulevardul 1 Decembrie");
-        $station5->setAddress("Bucharest, Romania");
+        $station5->setAddress("Bucharest");
 
         //Plugs
         $plug1 = new Plugs();

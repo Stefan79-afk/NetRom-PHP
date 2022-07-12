@@ -9,3 +9,11 @@ kernel:
 app_logout:
     path: /logout
     methods: GET
+
+app_stations:
+    path: /stations/{location}
+    controller: App\Controller\BookingController::index
+
+app_redirect:
+    path: /stations
+    controller: App\Controller\BookingController::redirection
