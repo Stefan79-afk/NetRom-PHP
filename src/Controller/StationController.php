@@ -3,16 +3,10 @@
 namespace App\Controller;
 
 
-use App\Entity\Booking;
 use App\Entity\Station;
-use App\Entity\User;
-use App\Repository\BookingRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
@@ -22,7 +16,6 @@ class StationController extends AbstractController
     public function index(EntityManagerInterface $em, string $location, Security $security): Response
     {
         $repository = $em->getRepository(Station::class);
-        $user = $security->getUser();
         $stationData = $repository->findBy(array('address' => $location));
         return $this->render('app/index.html.twig', [
             'stations' => $stationData,
