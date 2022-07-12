@@ -7,14 +7,19 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Form\FormTypeInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, FormTypeInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -149,5 +154,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->address = $address;
 
         return $this;
+    }
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        // TODO: Implement buildForm() method.
+    }
+
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        // TODO: Implement buildView() method.
+    }
+
+    public function finishView(FormView $view, FormInterface $form, array $options)
+    {
+        // TODO: Implement finishView() method.
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        // TODO: Implement configureOptions() method.
+    }
+
+    public function getBlockPrefix()
+    {
+        // TODO: Implement getBlockPrefix() method.
+    }
+
+    public function getParent()
+    {
+        // TODO: Implement getParent() method.
     }
 }

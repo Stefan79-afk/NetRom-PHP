@@ -12,8 +12,8 @@ app_logout:
 
 app_stations:
     path: /stations/{location}
-    controller: App\Controller\BookingController::index
+    controller: App\Controller\StationController::index
 
 app_redirect:
     path: /stations
-    controller: App\Controller\BookingController::redirection
+    controller: App\Controller\StationController::redirection

@@ -14,10 +14,14 @@
             <div class="mb-3">
                 {{ form_row(registrationForm.email) }}
             </div>
+
+            <div class="mb-3">
+                {{ form_row(registrationForm.address) }}
+            </div>
             <div class="form-check mb-3">
                 {{ form_row(registrationForm.plainPassword, {
                     label: 'Password',
-                    attr: {'class' : 'form-control, bg-secondary, text-white '}
+                    attr: {'class' : 'form-control, bg-secondary'}
                 }) }}
             </div>
             {{ form_row(registrationForm.agreeTerms) }}
