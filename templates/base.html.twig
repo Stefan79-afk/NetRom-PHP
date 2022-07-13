@@ -22,7 +22,7 @@
     <a class="nav-link btn btn-primary" href="/account/user={{ app.user.id }}">Account</a>
     <a class="nav-link btn btn-primary" href="/cars/user={{ app.user.id }}">My Cars</a>
     <a class="nav-link btn btn-primary" href="/stations">Stations</a>
-    <button class="btn-success btn">Create Booking</button>
+    <a class="nav-link btn btn-primary" href="/bookings/user={{ app.user.id }}">Bookings</a>
     <button class="btn-warning btn" onclick="location.href='/logout'">Logout</button>
 </nav>
 {% endif %}
