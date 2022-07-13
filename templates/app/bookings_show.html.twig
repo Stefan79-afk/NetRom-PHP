@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ app.user.name }}'s Bookings
+{% endblock %}
+
+{% block body %}
+    <h1 class="container-fluid text-center p-5 bg-primary text-white">Your Bookings</h1>
+
+    <table class="table table-hover text-white table-dark table-striped">
+        <thead>
+        <tr>
+            <th>Car Plate</th>
+            <th>Date and Time</th>
+            <th>Duration</th>
+            <th>Station</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for index in bookings %}
+            {% for booking in index %}
+                <tr>
+                    <td>{{ booking.getCarId.getPlate}}</td>
+                    <td>{{ booking.getStartTime|date}}</td>
+                    <td>{{ booking.getDuration }}</td>
+                    <td>{{ booking.getPlugId.getStation.getLocation }}</td>
+                    <td>
+                        <button class="btn btn-success">Update Booking</button>
+                        <a href="user={{ app.user.id }}/delete_booking={{ booking.getId }}" class="btn btn-danger">Delete Booking</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+
+    </table>
+{% endblock %}
