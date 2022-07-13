@@ -8,7 +8,7 @@
 {% block body %}
 
     <h1 class="container-fluid text-center p-5 bg-primary text-white">Your Cars</h1>
-    <table class="table table-hover text-white table-dark table-striped">
+    <table class="table table-hover text-white table-dark table-striped text-center">
         <thead>
         <tr>
             <th>Car Plate</th>
@@ -24,7 +24,7 @@
                 <td>{{ car.getPlugType}}</td>
 
                 <td>
-                    <button class="btn btn-success">Update Car</button>
+                    <a href="user={{ app.user.id }}/edit_car={{ car.getId }}" class="btn btn-success">Update Car</a>
                     <a href="user={{ app.user.id }}/delete_car={{ car.getId }}" class="btn btn-danger">Delete Car</a>
                 </td>
             </tr>

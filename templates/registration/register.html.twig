@@ -7,28 +7,34 @@
 
     <div class="text-center p-5">
         {{ form_start(registrationForm) }}
-            <div class="mb-3 mt-3">
-                {{ form_row(registrationForm.name) }}
+            <div class="mb-3 mt-3 text-center">
+                {{ form_row(registrationForm.name, {
+                    attr: {'class' : 'bg-secondary', 'style': 'width: 30%; margin:auto; color: white;'}
+                }) }}
             </div>
 
-            <div class="mb-3">
-                {{ form_row(registrationForm.email) }}
+            <div class="mb-3 text-center">
+                {{ form_row(registrationForm.email, {
+                    attr: {'class' : 'bg-secondary', 'style': 'width: 30%; margin:auto; color: white;'}
+                }) }}
             </div>
 
-            <div class="mb-3">
-                {{ form_row(registrationForm.address) }}
+            <div class="mb-3 text-center">
+                {{ form_row(registrationForm.address, {
+                    attr: {'class' : 'bg-secondary', 'style': 'width: 30%; margin:auto; color: white;'}
+                }) }}
             </div>
-            <div class="form-check mb-3">
+            <div class="form-check mb-3 text-center">
                 {{ form_row(registrationForm.plainPassword, {
                     label: 'Password',
-                    attr: {'class' : 'form-control, bg-secondary'}
+                    attr: {'class' : 'bg-secondary', 'style': 'width: 30%; margin:auto; color: white;'}
                 }) }}
             </div>
             {{ form_row(registrationForm.agreeTerms) }}
 
-            <button type="submit" class="btn-primary text-white">Register</button>
+            <button type="submit" class="btn btn-primary text-white">Register</button>
         {{ form_end(registrationForm) }}
 
-        <h5>Already have an account? <a href="login">Log in</a> </h5>
+        <h5 style="margin-top: 3rem">Already have an account? <a href="login">Log in</a> </h5>
     </div>
 {% endblock %}
