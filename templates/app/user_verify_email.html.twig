@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Verify Email
+{% endblock %}
+
+{% block body %}
+    <header class="container-fluid container-lg text-center bg-primary p-5">
+        <h1>Enter your email</h1>
+    </header>
+
+    {% if error == "Not Found" %}
+        <h2 class="text-center bg-danger p-3">User not found</h2>
+    {% else %}
+
+    {% endif %}
+
+
+    <main class="text-center mb-5 p-5">
+        {{ form(form) }}
+    </main>
+{% endblock %}
