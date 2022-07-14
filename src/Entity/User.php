@@ -44,6 +44,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, FormTyp
     #[ORM\Column(type: 'string', length: 255)]
     private $address;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $adminKey;
+
     public function __construct()
     {
         $this->cars = new ArrayCollection();
@@ -184,5 +187,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, FormTyp
     public function getParent()
     {
         // TODO: Implement getParent() method.
+    }
+
+    public function getAdminKey(): ?string
+    {
+        return $this->adminKey;
+    }
+
+    public function setAdminKey(?string $adminKey): self
+    {
+        $this->adminKey = $adminKey;
+
+        return $this;
     }
 }

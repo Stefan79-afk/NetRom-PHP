@@ -64,4 +64,30 @@ class CarController extends AbstractController
 
 
     }
+
+    #[Route('cars/user={id}/create', name: 'app_cars_create')]
+    public function create(int $id, Request $request): Response{
+        $car = new Car();
+        $repository = $this->entityManager->getRepository(User::class);
+
+        $form = $this->createForm(CarType::class, $car);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $car->setPlate($form->get('plate')->getData());
+            $car->setPlugType($form->get('plugType')->getData());
+            $user = $repository->find($id);
+
+            $user->addCar($car);
+            $this->entityManager->persist($car);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('app_cars_view', ['id' => $id]);
+        }
+
+        return $this->renderForm('app/car_create.html.twig', [
+            'form' => $form
+        ]);
+    }
 }
