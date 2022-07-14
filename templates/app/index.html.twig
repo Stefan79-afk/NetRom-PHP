@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <main style="">
+    <main class="text-center">
         <h1 class="container-fluid text-center p-5 bg-primary text-white" >Stations in {{ app.user.getAddress }}</h1>
         <table class="table table-hover text-white table-dark table-striped">
             <thead>
@@ -29,11 +29,24 @@
                         </ul>
                     </td>
 
-                    <td><button>See on Google Maps</button></td>
+                    <td>
+                        <ul>
+                            <!--<li><button>See on Google Maps</button></li>-->
+                            {% if 'ROLE_ADMIN' in app.user.roles %}
+                                <li><a href="/stations/station={{ station.getId() }}" class="btn btn-info">View More</a></li>
+                                <li><a href="stations/delete={{ station.getId() }}" class="btn btn-danger">Delete Station and its Plugs</a> </li>
+                            {% endif %}
+                        </ul>
+                    </td>
+
                 </tr>
             {% endfor %}
             </tbody>
 
         </table>
+
+        {% if 'ROLE_ADMIN' in app.user.roles %}
+            <a href="stations/create" class="btn btn-success">Create Station</a>
+        {% endif %}
     </main>
 {% endblock %}
