@@ -7,6 +7,11 @@
 {% block body %}
     <h1 class="container-fluid text-center p-5 bg-primary text-white">Your Bookings</h1>
 
+    {#
+    {% if error == 'No Plug' %}
+        <h2 class="container-fluid text-center bg-danger">There is no available plug for your car. Please select another station</h2>
+{% endif %}
+    #}
     <table class="table table-hover text-white table-dark table-striped">
         <thead>
         <tr>
@@ -27,7 +32,7 @@
                     <td>{{ booking.getDuration }}</td>
                     <td>{{ booking.getPlugId.getStation.getLocation }}</td>
                     <td>
-                        <button class="btn btn-success">Update Booking</button>
+                        <a href="user={{ app.user.id }}/update_booking={{ booking.getId }}" class="btn btn-success">Update Booking</a>
                         <a href="user={{ app.user.id }}/delete_booking={{ booking.getId }}" class="btn btn-danger">Delete Booking</a>
                     </td>
                 </tr>

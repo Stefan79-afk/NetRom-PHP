@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Edit User Info
+{% endblock %}
+
+{% block body %}
+    <header class="container-fluid container-lg text-center bg-primary p-5">
+        <h1>Edit Account Information</h1>
+    </header>
+
+   <main class="container text-center p-5 mt-5">
+       {{ form(form) }}
+   </main>
+{% endblock %}

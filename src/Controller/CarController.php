@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Car;
 use App\Entity\User;
+use App\Form\CarType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,5 +38,56 @@ class CarController extends AbstractController
         $this->entityManager->flush();
 
         return $this->redirectToRoute('app_cars_view', ['id' => $id]);
+    }
+
+    #[Route('cars/user={id}/edit_car={carId}', name: 'app_cars_update')]
+    public function edit(int $id, int $carId, Request $request): Response{
+        $repository = $this->entityManager->getRepository(Car::class);
+        $car = $repository->find($carId);
+        $form = $this->createForm(CarType::class, $car);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $carNew = $form->getData();
+            $car->setPlate($carNew->getPlate());
+            $car->setPlugType($carNew->getPlugType());
+
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('app_cars_view', ['id' => $id]);
+        }
+
+        return $this->renderForm('app/car_edit.html.twig', [
+            'form' => $form,
+            'car' => $car->getId()
+        ]);
+
+
+    }
+
+    #[Route('cars/user={id}/create', name: 'app_cars_create')]
+    public function create(int $id, Request $request): Response{
+        $car = new Car();
+        $repository = $this->entityManager->getRepository(User::class);
+
+        $form = $this->createForm(CarType::class, $car);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $car->setPlate($form->get('plate')->getData());
+            $car->setPlugType($form->get('plugType')->getData());
+            $user = $repository->find($id);
+
+            $user->addCar($car);
+            $this->entityManager->persist($car);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('app_cars_view', ['id' => $id]);
+        }
+
+        return $this->renderForm('app/car_create.html.twig', [
+            'form' => $form
+        ]);
     }
 }
