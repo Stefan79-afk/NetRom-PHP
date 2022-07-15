@@ -59,7 +59,7 @@ class BookingController extends AbstractController
 
     }
 
-    /*
+
     #[Route('bookings/user={id}/update_booking={bookingId}', name: 'app_bookings_update')]
     public function update(int $id, int $bookingId, Request $request): Response{
         $repository = $this->entityManager->getRepository(Booking::class);
@@ -70,7 +70,7 @@ class BookingController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $bookingNew = $form->getData();
 
-            $station = $bookingNew->getPlugId();
+            $station = $bookingNew->getPlugId()->getStation();
 
             $plugs = $station->getPlugs();
             $plugId = 0;
@@ -83,18 +83,12 @@ class BookingController extends AbstractController
             }
 
             if($error == null){
-                $booking->setDuration($bookingNew->getDuration());
-                $booking->setStartTime($bookingNew->getStartTime());
-                $booking->setCarId($bookingNew->getCarId());
-                $booking->setPlugId($plugId);
-
                 $this->entityManager->flush();
 
                 return $this->redirectToRoute('app_bookings_show', ['id' => $id]);
             }
 
             else{
-                $error = 'No Plug';
                 return $this->redirectToRoute('app_bookings_update', [
                     'id' => $id,
                     'bookindId' => $bookingId
@@ -106,9 +100,34 @@ class BookingController extends AbstractController
         return $this->renderForm('app/bookings_edit.html.twig', [
             'form' => $form,
             'booking' => $booking->getId(),
-            'error' => $error
         ]);
     }
-    */
+
+    #[Route('/bookings/create', name: 'app_booking_create')]
+    public function createBooking(Request $request): Response{
+
+        $booking = new Booking();
+        $form = $this->createForm(BookingType::class, $booking);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $this->entityManager->persist($booking);
+
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('app_bookings_show', [
+                'id' => $this->security->getUser()->getId()
+                ]);
+        }
+
+        return $this->renderForm('app/bookings_create.html.twig', [
+            'form' => $form
+        ]);
+    }
+
+
+
 
 }

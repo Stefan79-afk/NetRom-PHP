@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Create Booking
+{% endblock %}
+
+{% block body %}
+    <header class="container-fluid container-lg text-center bg-primary p-5">
+        <h1>Create Booking</h1>
+    </header>
+
+    <main class="container text-center p-5 mt-5">
+        {{ form_start(form) }}
+        {{ form_row(form.duration) }}
+        <div class="text-center">
+            {{ form_row(form.startTime) }}
+        </div>
+
+        {{ form_row(form.carId) }}
+
+        {{ form_row(form.plugId) }}
+        {{ form_row(form.submit) }}
+        {{ form_end(form) }}
+    </main>
+{% endblock %}
