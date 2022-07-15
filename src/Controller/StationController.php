@@ -8,7 +8,9 @@ use App\Entity\Plugs;
 use App\Entity\Station;
 use App\Form\PlugsType;
 use App\Form\StationType;
+use Doctrine\DBAL\Types\TextType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,12 +29,31 @@ class StationController extends AbstractController
     }
 
     #[Route('/stations/{location}', name: 'app_stations')]
-    public function index(string $location): Response
+    public function index(string $location, Request $request): Response
     {
         $repository = $this->entityManager->getRepository(Station::class);
         $stationData = $repository->findBy(array('address' => $location));
-        return $this->render('app/index.html.twig', [
+
+        $data = [];
+        $form = $this->createFormBuilder($data)
+            ->add('city')
+            ->add('search', SubmitType::class)
+            ->getForm()
+        ;
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $city = $form->get('city')->getData();
+
+            return $this->redirectToRoute('app_stations', [
+                'location' => $city
+            ]);
+        }
+        return $this->renderForm('app/index.html.twig', [
             'stations' => $stationData,
+            'form' => $form,
+            'location' => $location
         ]);
     }
     #[Route('/', name:'app_default')]

@@ -11,15 +11,25 @@
 
     <main class="container text-center p-5 mt-5">
         {{ form_start(form) }}
-        {{ form_row(form.duration) }}
+        {{ form_row(form.duration, {
+            attr: {'class' : 'bg-secondary', 'style': 'width: 30%; margin:auto; color: white;'}
+        }) }}
         <div class="text-center">
-            {{ form_row(form.startTime) }}
+            {{ form_row(form.startTime, {
+                attr: {'class' : 'bg-secondary', 'style': 'width: 30%; margin:auto; color: white;'}
+            }) }}
         </div>
 
-        {{ form_row(form.carId) }}
+        {{ form_row(form.carId, {
+            attr: {'class' : 'bg-secondary', 'style': 'width: 30%; margin:auto; color: white;'}
+        }) }}
 
-        {{ form_row(form.plugId) }}
-        {{ form_row(form.submit) }}
+        {{ form_row(form.plugId, {
+            attr: {'class' : 'bg-secondary', 'style': 'width: 30%; margin:auto; color: white;'}
+        }) }}
+        {{ form_row(form.submit, {
+            attr: {'class' : 'btn btn-success'}
+        }) }}
         {{ form_end(form) }}
     </main>
 {% endblock %}

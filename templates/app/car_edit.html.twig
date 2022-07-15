@@ -10,6 +10,18 @@
     </header>
 
     <main class="container text-center p-5 mt-5">
-        {{ form(form) }}
+        {{ form_start(form) }}
+            {{ form_row(form.plate, {
+                attr: {'class' : 'bg-secondary', 'style': 'width: 30%; margin:auto; color: white;'}
+            }) }}
+
+            {{ form_row(form.plugType, {
+                attr: {'class' : 'bg-secondary', 'style': 'width: 30%; margin:auto; color: white;'}
+            }) }}
+
+            {{ form_row(form.submit, {
+                attr: {'class' : 'btn btn-success'}
+            }) }}
+        {{ form_end(form) }}
     </main>
 {% endblock %}

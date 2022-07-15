@@ -1,11 +1,11 @@
 {% extends './base.html.twig' %}
 
-{% block title %}Stations in {{ app.user.getAddress }}{% endblock %}
+{% block title %}Stations in {{ location}}{% endblock %}
 
 {% block body %}
 
     <main class="text-center">
-        <h1 class="container-fluid text-center p-5 bg-primary text-white" >Stations in {{ app.user.getAddress }}</h1>
+        <h1 class="container-fluid text-center p-5 bg-primary text-white" >Stations in {{ location }}</h1>
         <table class="table table-hover text-white table-dark table-striped">
             <thead>
             <tr>
@@ -48,6 +48,17 @@
 
         </table>
 
+        <div class="m-5">
+            {{ form_start(form) }}
+                {{ form_row(form.city, {
+                    attr: {'class' : 'bg-secondary', 'style': 'width: 30%; margin:auto; color: white;'}
+                }) }}
+
+                {{ form_row(form.search, {
+                    attr: {'class' : 'btn btn-success'}
+                }) }}
+            {{ form_end(form) }}
+        </div>
         {% if 'ROLE_ADMIN' in app.user.roles %}
             <a href="/stations/create" class="btn btn-success">Create Station</a>
         {% endif %}
