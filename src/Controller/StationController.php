@@ -180,4 +180,29 @@ class StationController extends AbstractController
         ]);
     }
 
+    #[Route('/stations/update={id}', name: 'app_station_create')]
+    public function updateStation(int $id, Request $request): Response{
+        $repository = $this->entityManager->getRepository(Station::class);
+
+        $station = $repository->find($id);
+        $form = $this->createForm(StationType::class, $station);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('app_stations_details', [
+                'id' => $id
+            ]);
+        }
+
+        return $this->renderForm('app/station_create.html.twig', [
+            'form' => $form,
+            'id' => $id
+        ]);
+    }
+
+
 }

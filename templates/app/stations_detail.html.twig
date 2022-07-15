@@ -13,6 +13,7 @@
                 <li class="m-3">Station Name: {{ station.getName() }}</li>
                 <li class="m-3">Station Location: {{ station.getLocation() }}</li>
                 <li class="m-3">Station Address: {{ station.getAddress() }}</li>
+                <li class="m-3"><a href="/stations/update={{ station.getId() }}" class="btn btn-success">Update Details</a> </li>
                 <li class="m-3">Station Plugs:
                     <table class="table table-hover text-white table-dark table-striped text-center m-3 bg-secondary">
                         <thead>
