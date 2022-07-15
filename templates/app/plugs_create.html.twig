@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Edit Plug
+    Create Plug
 {% endblock %}
 
 {% block body %}
     <header class="container-fluid container-lg text-center bg-primary p-5">
-        <h1>Edit Plug Info</h1>
+        <h1>Create a new Plug</h1>
     </header>
 
     <main class="container text-center p-5 mt-5">
         {{ form_start(form) }}
 
-            {{ form_row(form.status) }}
-            {{ form_row(form.type) }}
-            {{ form_row(form.station) }}
+        {{ form_row(form.status) }}
+        {{ form_row(form.type) }}
+        {{ form_row(form.station) }}
         {{ form_end(form) }}
     </main>
 {% endblock %}

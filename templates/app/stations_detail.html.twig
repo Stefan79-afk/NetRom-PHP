@@ -29,8 +29,8 @@
                                     <td>{{ plug.getType() }}</td>
                                     <td>{{ plug.getStatus() }}</td>
                                     <td>
-                                        <a href="/stations/station={{ app.user.id }}/edit_plug={{ plug.getId() }}" class="btn btn-success">Update Plug</a>
-                                        <a href="/stations/station={{ app.user.id }}/delete_plug={{ plug.getId() }}" class="btn btn-danger">Delete Plug</a>
+                                        <a href="/stations/station={{ station.getId() }}/edit_plug={{ plug.getId() }}" class="btn btn-success">Update Plug</a>
+                                        <a href="/stations/station={{ station.getId() }}/delete_plug={{ plug.getId() }}" class="btn btn-danger">Delete Plug</a>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -39,7 +39,7 @@
                 </li>
 
                 <li class="m-5">
-                    <a href="" class="btn btn-success">Create Plug</a>
+                    <a href="/stations/station={{ station.getId() }}/create_plug" class="btn btn-success">Create Plug</a>
                 </li>
             </ul>
         </div>

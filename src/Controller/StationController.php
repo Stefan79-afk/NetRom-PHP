@@ -102,4 +102,33 @@ class StationController extends AbstractController
 
     }
 
+    #[Route('stations/station={id}/create_plug', name: "app_plugs_create")]
+    public function createPlug(int $id, Request $request): Response{
+
+        $repository = $this->entityManager->getRepository(Station::class);
+
+        $station = $repository->find($id);
+        $plug = new Plugs();
+
+        $form = $this->createForm(PlugsType::class, $plug);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $station->addPlug($plug);
+
+            $this->entityManager->persist($plug);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('app_stations_details', [
+                'id' => $id
+            ]);
+        }
+
+        return $this->renderForm('app/plugs_create.html.twig', [
+            'form' => $form
+        ]);
+    }
+
 }
