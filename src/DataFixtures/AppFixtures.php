@@ -53,7 +53,7 @@ class AppFixtures extends Fixture
         $user3->setEmail("kelly.williams@gmail.com");
         $user3->setPassword($this->passwordHasher->hashPassword(
             $user3,
-            "qwdfvbhjio90"
+            ""
         ));
         $user3->setRoles(['ROLE_USER']);
         $user3->setAddress("Timisoara");
