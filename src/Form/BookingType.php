@@ -8,6 +8,7 @@ use App\Entity\Plugs;
 use App\Entity\Station;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\AbstractType;
@@ -50,12 +51,8 @@ class BookingType extends AbstractType
         $builder
             ->add('duration')
             ->add('startTime', DateTimeType::class)
-            ->add('carId', ChoiceType::class, [
-                'choices' => $carsArr
-            ])
-            ->add('plugId', ChoiceType::class, [
-                'choices' => $stationsArr
-            ])
+            ->add('carId')
+            ->add('plugId')
             ->add('submit', SubmitType::class)
         ;
     }

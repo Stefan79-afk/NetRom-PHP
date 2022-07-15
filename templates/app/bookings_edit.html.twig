@@ -10,6 +10,16 @@
     </header>
 
     <main class="container text-center p-5 mt-5">
-        {{ form(form) }}
+        {{ form_start(form) }}
+            {{ form_row(form.duration) }}
+            <div class="text-center">
+                {{ form_row(form.startTime) }}
+            </div>
+
+            {{ form_row(form.carId) }}
+
+            {{ form_row(form.plugId) }}
+            {{ form_row(form.submit) }}
+        {{ form_end(form) }}
     </main>
 {% endblock %}
