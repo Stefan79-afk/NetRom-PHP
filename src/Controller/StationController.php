@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 
+use App\Entity\Booking;
 use App\Entity\Plugs;
 use App\Entity\Station;
 use App\Form\PlugsType;
+use App\Form\StationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -102,7 +104,7 @@ class StationController extends AbstractController
 
     }
 
-    #[Route('stations/station={id}/create_plug', name: "app_plugs_create")]
+    #[Route('/stations/station={id}/create_plug', name: "app_plugs_create")]
     public function createPlug(int $id, Request $request): Response{
 
         $repository = $this->entityManager->getRepository(Station::class);
@@ -127,6 +129,53 @@ class StationController extends AbstractController
         }
 
         return $this->renderForm('app/plugs_create.html.twig', [
+            'form' => $form
+        ]);
+    }
+
+    #[Route('stations/delete={id}', name: 'app_station_delete')]
+    public function deleteStation(int $id): Response{
+        $repository = $this->entityManager->getRepository(Station::class);
+        $repository2 = $this->entityManager->getRepository(Booking::class);
+        $station = $repository->find($id);
+
+        $plugs = $station->getPlugs();
+
+        foreach ($plugs as $plug){
+            $bookings = $repository2->findBy(['plugId' => $plug->getId()]);
+
+            foreach ($bookings as $booking){
+                $this->entityManager->remove($booking);
+            }
+
+            $this->entityManager->remove($plug);
+        }
+
+        $this->entityManager->remove($station);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_stations', [
+            'location' => $station->getAddress()
+        ]);
+    }
+
+    #[Route('/stations/create', name: 'app_station_create')]
+    public function createStation(Request $request): Response{
+        $station = new Station();
+        $form = $this->createForm(StationType::class, $station);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $this->entityManager->persist($station);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('app_stations', [
+                'location' => $station->getAddress()
+            ]);
+        }
+
+        return $this->renderForm('app/station_create.html.twig', [
             'form' => $form
         ]);
     }

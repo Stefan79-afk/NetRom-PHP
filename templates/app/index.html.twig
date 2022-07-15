@@ -34,7 +34,10 @@
                             <!--<li><button>See on Google Maps</button></li>-->
                             {% if 'ROLE_ADMIN' in app.user.roles %}
                                 <li><a href="/stations/station={{ station.getId() }}" class="btn btn-info">View More</a></li>
-                                <li><a href="stations/delete={{ station.getId() }}" class="btn btn-danger">Delete Station and its Plugs</a> </li>
+                                <li>
+                                    <a href="/stations/delete={{ station.getId() }}" class="btn btn-danger">Delete Station</a>
+                                    <p style="color:red">Careful! This will also delete every plug associated with the station as well as every booking!</p>
+                                </li>
                             {% endif %}
                         </ul>
                     </td>
@@ -46,7 +49,7 @@
         </table>
 
         {% if 'ROLE_ADMIN' in app.user.roles %}
-            <a href="stations/create" class="btn btn-success">Create Station</a>
+            <a href="/stations/create" class="btn btn-success">Create Station</a>
         {% endif %}
     </main>
 {% endblock %}
